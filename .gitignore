@@ -3,5 +3,4 @@ package-lock.json
 
 # Ignore specific directories like node_modules or build (if applicable)
 node_modules/
-
-.env
+# .env
