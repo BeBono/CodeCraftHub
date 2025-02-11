@@ -21,7 +21,7 @@ services:
     container_name: node-app
     restart: always
     environment:
-      DB_URI: mongodb://root:h4eDXlO7VIq6BU2YxS4p3dsr@mongodb:27017/admin?retryWrites=true&w=majority
+      DB_URI: mongodb://root:h4eDXlO7VIq6BU2YxS4p3dsr@172.21.5.138:27017/admin?retryWrites=true&w=majority
       JWT_SECRET: "41f29c7ba42b164ac4b30b7f0d382013801604e496a04f28456b58c7af7cb3f2"
     depends_on:
       - mongodb
