@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # MongoDB service
+  mongodb:
+    image: mongo:latest  # Use the official MongoDB image
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: h4eDXlO7VIq6BU2YxS4p3dsr
+      MONGO_INITDB_DATABASE: admin
+    volumes:
+      - mongodb-data:/data/db  # Persist MongoDB data between container restarts
+    ports:
+      - "27017:27017"  # Expose MongoDB port
+
+  # Node.js application service
+  node-app:
+    build: .  # Build the Dockerfile in the current directory
+    container_name: node-app
+    restart: always
+    environment:
+      DB_URI: mongodb://root:h4eDXlO7VIq6BU2YxS4p3dsr@mongodb:27017/admin?retryWrites=true&w=majority
+      JWT_SECRET: "41f29c7ba42b164ac4b30b7f0d382013801604e496a04f28456b58c7af7cb3f2"
+    depends_on:
+      - mongodb
+    ports:
+      - "5000:5000"  # Expose the port the app listens on
+    volumes:
+      - .:/usr/src/app  # Mount the application directory to allow live code changes
+    networks:
+      - app-network
+
+volumes:
+  mongodb-data:  # Declare a named volume for MongoDB data persistence
+
+networks:
+  app-network:
+    driver: bridge
