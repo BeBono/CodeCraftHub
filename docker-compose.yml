@@ -8,7 +8,7 @@ services:
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: h4eDXlO7VIq6BU2YxS4p3dsr
+      MONGO_INITDB_ROOT_PASSWORD: SijJXd7itY1yruVEmaSdvO06
       MONGO_INITDB_DATABASE: admin
     volumes:
       - mongodb-data:/data/db  # Persist MongoDB data between container restarts
@@ -21,14 +21,15 @@ services:
     container_name: node-app
     restart: always
     environment:
-      DB_URI: mongodb://root:h4eDXlO7VIq6BU2YxS4p3dsr@172.21.5.138:27017/admin?retryWrites=true&w=majority
-      JWT_SECRET: "41f29c7ba42b164ac4b30b7f0d382013801604e496a04f28456b58c7af7cb3f2"
+      DB_URI: mongodb://root:SijJXd7itY1yruVEmaSdvO06@172.21.43.202:27017/admin?retryWrites=true&w=majority
+      JWT_SECRET: "4d9c8c881fcb09e4ab22b448f8b2af78b16740fa9e2df3358dae6e46351b14d1"
     depends_on:
       - mongodb
     ports:
       - "5000:5000"  # Expose the port the app listens on
     volumes:
       - .:/usr/src/app  # Mount the application directory to allow live code changes
+      - /usr/src/app/node_modules
     networks:
       - app-network
 
